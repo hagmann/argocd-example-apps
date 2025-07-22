@@ -3,8 +3,14 @@ kind: Deployment
 metadata:
   name: app
 spec:
-  ...
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
   template:
+    metadata:
+      labels:
+        app: app
     spec:
       containers:
         - name: app
@@ -17,6 +23,8 @@ kind: Service
 metadata:
   name: app
 spec:
+  selector:
+    app: app
   ports:
     - port: 80
       targetPort: 8080
